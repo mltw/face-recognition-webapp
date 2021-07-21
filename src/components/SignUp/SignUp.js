@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const SignUp = ({onRouteChange}) => {
     return (
@@ -22,12 +23,12 @@ const SignUp = ({onRouteChange}) => {
                         </div>
                     </fieldset>
                     <div className="">
-                        <input 
+                        <Link 
                             onClick = { () => onRouteChange('home')} // use arrow functions here as we dw it to run immediately, rather only run during onClick
-                            className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
-                            type="submit" 
-                            value="Sign Up">
-                        </input>
+                            className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib no-underline" 
+                            to="/main">
+                            Sign up
+                        </Link>
                     </div>
                 </div>
             </main>

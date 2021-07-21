@@ -10,6 +10,8 @@ import React, { Component } from 'react'
 import Particles from 'react-particles-js';
 import Clarifai from 'clarifai';
 
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 // const particlesOptions2 = {
 //   "particles": {
 //     "number": {
@@ -145,27 +147,52 @@ class App extends Component {
 
   render(){
   return (
+  //   <div className="App">
+  //     <Particles 
+  //       className = 'particles'
+  //       params = {particlesOptions}
+  //       />
+  //     <Navigation isSignedIn = {this.state.isSignedIn} onRouteChange = {this.onRouteChange} />
+  //     {this.state.route === 'home' ? 
+  //       <div>
+  //         <Logo />
+  //         <Rank />
+  //         <ImageLinkForm onInputChange = {this.onInputChange} 
+  //                       onSubmit = {this.onSubmit}/>
+  //         <FaceRecognition box = {this.state.box} imageURL = {this.state.imageURL}/>
+  //       </div>
+  //       : (
+  //       (this.state.route === 'signup') ?
+  //       <SignUp onRouteChange = {this.onRouteChange}> </SignUp> :
+  //       <SignIn onRouteChange = {this.onRouteChange}/> 
+  //       )
+  // }
+  //   </div>
+  <Router>
     <div className="App">
       <Particles 
         className = 'particles'
         params = {particlesOptions}
         />
-      <Navigation isSignedIn = {this.state.isSignedIn} onRouteChange = {this.onRouteChange} />
-      {this.state.route === 'home' ? 
-        <div>
-          <Logo />
-          <Rank />
-          <ImageLinkForm onInputChange = {this.onInputChange} 
-                        onSubmit = {this.onSubmit}/>
-          <FaceRecognition box = {this.state.box} imageURL = {this.state.imageURL}/>
-        </div>
-        : (
-        (this.state.route === 'signup') ?
-        <SignUp onRouteChange = {this.onRouteChange}> </SignUp> :
-        <SignIn onRouteChange = {this.onRouteChange}/> 
-        )
-  }
+      <Navigation isSignedIn = {this.state.isSignedIn} onRouteChange = {this.onRouteChange} />  
+      <Switch>
+        <Route path="/" exact render={props => <SignIn onRouteChange = {this.onRouteChange}/> } /> 
+        <Route path="/signup" exact render = {props => <SignUp onRouteChange = {this.onRouteChange} />} /> 
+        <Route path="/main" exact 
+          render= { props=>   
+            <div>
+              <Logo />
+              <Rank />
+              <ImageLinkForm onInputChange = {this.onInputChange} 
+                            onSubmit = {this.onSubmit}/>
+              <FaceRecognition box = {this.state.box} imageURL = {this.state.imageURL}/>
+            </div>}>
+        </Route>
+                  
+      </Switch>  
     </div>
+  </Router>
+
   );
   }
 }
